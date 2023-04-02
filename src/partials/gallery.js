@@ -22,7 +22,6 @@ const onSearchFormSubmit = async event => {
 
   if (searchQuery === '') {
     searchFormEl.reset();
-
     Notify.info('Please enter search request', {clickToClose: true,});
     return;
   }
@@ -31,24 +30,25 @@ const onSearchFormSubmit = async event => {
     const { hits: images, totalHits: totalQuantity, total: quantity } = await pixabayApi.fetchPhotos();
 
     if (quantity === 0) {
+      loadMoreBtnEl.classList.add('is-hidden');
       Notify.failure('Sorry, there are no images matching your search query. Please try again.', {clickToClose: true,});
       return;
     }
 
     if (totalQuantity < pixabayApi.page * pixabayApi.perPage) {
       loadMoreBtnEl.classList.add('is-hidden');
-      Notify.info("We're sorry, but you've reached the end of search results.", {clickToClose: true,});
     } else {
       loadMoreBtnEl.classList.remove('is-hidden');
-      Notify.success(`Hooray! We found ${totalQuantity} images.`, {clickToClose: true,});
     }
+
+    Notify.success(`Hooray! We found ${totalQuantity} images.`, {clickToClose: true,});
 
     createGalleryCards(images);
 
     lightbox = new SimpleLightbox('.gallery a');
 
-  } catch {
-    Notify.failure('Sorry, Please try again later.', {clickToClose: true,});
+  } catch (error) {
+    console.log(error);
   }
 
 };
@@ -70,8 +70,8 @@ const onLoadMoreBtnClick = async () => {
 
     autoScrollPage();
 
-  } catch {
-    Notify.failure('Sorry, Please try again later.', {clickToClose: true,});
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -90,9 +90,9 @@ function createGalleryCards(data) {
         galleryListEl.insertAdjacentHTML(
           'beforeend',
           `
-          <a href="${largeImageURL}">
-            <div class="photo-card">
-              <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+          <a class="photo-card" href="${largeImageURL}">
+            <div >
+              <img class="gallery__item" src="${webformatURL}" alt="${tags}" loading="lazy" />
               <div class="info">
                 <p class="info-item">
                   <b>Likes</b>
