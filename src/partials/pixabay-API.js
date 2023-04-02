@@ -4,11 +4,14 @@ export class PixabayAPI {
   #BASE_URL = 'https://pixabay.com/api/';
   #API_KEY = '34936620-e9065520b73f9ad666c5d9e82';
 
-  page = 1;
-  query = '';
+  constructor() {
+    this.query = '';
+    this.page = 1;
+    this.perPage = 40;
+  }
 
  async fetchPhotos() {
-    return await axios.get(`${this.#BASE_URL}`, {
+    const response = await axios.get(`${this.#BASE_URL}`, {
       params: {
         key: this.#API_KEY,
         q: this.query,
@@ -16,9 +19,17 @@ export class PixabayAPI {
         orientation: 'horizontal',
         safesearch: true,
         page: this.page,
-        per_page: 40,
+        per_page: this.perPage,
       },
-    });
-    // return response;
+    }); 
+    return response.data;
+  }
+
+  incrementPage() {
+    this.page += 1;
+  }
+
+  pageReset() {
+    this.page = 1;
   }
 }
