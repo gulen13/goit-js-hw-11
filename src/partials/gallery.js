@@ -45,7 +45,7 @@ const onSearchFormSubmit = async event => {
 
     createGalleryCards(images);
 
-    lightbox = new SimpleLightbox('.gallery a');
+    const lightbox = new SimpleLightbox('.gallery a');
 
   } catch (error) {
     console.log(error);
