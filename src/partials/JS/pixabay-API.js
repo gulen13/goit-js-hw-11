@@ -11,7 +11,7 @@ export class PixabayAPI {
   }
 
  async fetchPhotos() {
-    const response = await axios.get(`${this.#BASE_URL}`, {
+    const {data} = await axios.get(`${this.#BASE_URL}`, {
       params: {
         key: this.#API_KEY,
         q: this.query,
@@ -22,7 +22,7 @@ export class PixabayAPI {
         per_page: this.perPage,
       },
     }); 
-    return response.data;
+    return data;
   }
 
   incrementPage() {
