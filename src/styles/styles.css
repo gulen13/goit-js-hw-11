@@ -119,3 +119,17 @@ header {
   flex-direction: column;
   align-items: center;
 }
+.main-list {
+  font-size: 25px;
+  list-style: square;
+  margin: 100px;
+  font-style: italic;
+  display: inline-block;
+}
+.main-list__item {
+  margin: 20px;
+}
+.main-list__item:hover,
+.main-list__item:focus {
+  color: #2196f3;
+}

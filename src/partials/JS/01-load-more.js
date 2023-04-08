@@ -1,6 +1,6 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { PixabayAPI } from './partials/JS/pixabay-API';
-import { createGalleryCards } from './partials/JS/createGallery';
+import { PixabayAPI } from './pixabay-API';
+import { createGalleryCards } from './createGallery';
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
